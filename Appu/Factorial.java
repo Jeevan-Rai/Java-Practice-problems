@@ -7,10 +7,18 @@ public class Factorial {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the number to find the factorial:");
         int n = scanner.nextInt();
-        int fact = 1;
-        for (int i = 1; i <= n; i++) {
-            fact *= i;
+        int ans = findFact(n);
+        System.out.println("Factorial is:" + ans);
+    }
+
+    public static int findFact(int n)
+    {
+        if (n == 1)
+        {
+            return 1;
         }
-        System.out.println("Factorial is:" + fact);
+        else {
+            return n*findFact(n-1);
+        }
     }
 }
