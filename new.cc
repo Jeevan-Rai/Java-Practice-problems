@@ -290,3 +290,66 @@ int main()
     // Define your main program logic here
     return 0;
 }
+
+for (UINT8 lByteIndex = 0; lByteIndex < lAddrLen; lByteIndex += 2, lWriteIdx++)
+{
+    param[lWriteIdx] = BYTE_RESET_VAL;
+    if ('\0' == address[lByteIndex + 1])
+    {
+        param[lWriteIdx] = NIBBLE_FILLER;
+    }
+    else
+    {
+        switch (address[lByteIndex + 1])
+        {
+        case '*':
+            param[lWriteIdx] = 0xA0;
+            break;
+        case '#':
+            param[lWriteIdx] = 0xB0;
+            break;
+        case 'a':
+            param[lWriteIdx] = 0xC0;
+            break;
+        case 'b':
+            param[lWriteIdx] = 0xD0;
+            break;
+        case 'c':
+            param[lWriteIdx] = 0xE0;
+            break;
+        case 'f':
+            param[lWriteIdx] = 0xF0;
+            break;
+        default:
+            param[lWriteIdx] = ((address[lByteIndex + 1] - ASCII_OFFSET) &
+                                LOWER_NIBBLE_MASK)
+                               << ONE_NIBBLE_SHIFT;
+            break;
+        }
+    }
+    switch (address[lByteIndex])
+    {
+    case '*':
+        param[lWriteIdx] |= 0x0A;
+        break;
+    case '#':
+        param[lWriteIdx] |= 0x0B;
+        break;
+    case 'a':
+        param[lWriteIdx] |= 0x0C;
+        break;
+    case 'b':
+        param[lWriteIdx] |= 0x0D;
+        break;
+    case 'c':
+        param[lWriteIdx] |= 0x0E;
+        break;
+    case 'f':
+        param[lWriteIdx] |= 0x0F;
+        break;
+    default:
+        param[lWriteIdx] |= ((address[lByteIndex] - ASCII_OFFSET) &
+                             LOWER_NIBBLE_MASK);
+        break;
+    }
+}
