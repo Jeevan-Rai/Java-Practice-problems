@@ -70,7 +70,6 @@ class Tata extends CarOfIndia {
     }
 }
 
-
 class Add {
     public void result(int a, int b)
     {
